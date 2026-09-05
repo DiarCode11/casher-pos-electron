@@ -1,6 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 import * as path from 'path';
-import { initDatabase, ambilSemuaProduk, tambahProduk } from './database';
+import { addProduct, deleteProduct, getProducts, initDatabase } from './startup';
+import { ProductHandlers } from './ipcs/product.ipc';
+
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -24,18 +26,12 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(null)
   // 1. Nyalakan koneksi database SQLite
   initDatabase();
 
   // 2. Pasang Listener IPC untuk melayani permintaan dari React frontend
-  ipcMain.handle('ambil-produk', async () => {
-    return ambilSemuaProduk();
-  });
-
-  ipcMain.handle('tambah-produk', async (_event, nama: string, harga: number) => {
-    tambahProduk(nama, harga);
-    return { success: true };
-  });
+  ProductHandlers()
 
   // 3. Munculkan jendela aplikasi kasir
   createWindow();

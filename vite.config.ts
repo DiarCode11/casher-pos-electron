@@ -25,6 +25,9 @@ export default defineConfig({
           },
         },
       },
+      {
+        entry: 'electron/preload.ts',
+      },
     ]),
     renderer(),
   ],
