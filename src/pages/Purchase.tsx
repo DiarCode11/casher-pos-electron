@@ -1,5 +1,7 @@
 import Navbar from "@/components/shared/navbar";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Search } from "lucide-react";
 
 export default function Purchase() {
@@ -19,6 +21,21 @@ export default function Purchase() {
                             placeholder="Cari transaksi..."
                             className="w-full pl-9"
                         />
+                    </div>
+                    <div className="flex flex-1 justify-end gap-2">
+                        <Sheet>
+                            <SheetTrigger>
+                                <Button>
+                                    Tambah Pembelian
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent>
+                                <SheetHeader>
+                                <SheetTitle>Are you absolutely sure?</SheetTitle>
+                                <SheetDescription>This action cannot be undone.</SheetDescription>
+                                </SheetHeader>
+                            </SheetContent>
+                        </Sheet>
                     </div>
                 </div>
                 <div className="h-full w-full p-4 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-md">
